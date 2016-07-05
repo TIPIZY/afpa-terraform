@@ -29,3 +29,6 @@ export AWS_SECRET_ACCESS_KEY=<votre secret key>
 terraform plan
 
 terraform apply
+
+#Détruire l'infrastructure
+terraform destroy
