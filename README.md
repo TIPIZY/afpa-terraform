@@ -17,12 +17,15 @@ usage: terraform [--version] [--help] <command> [<args>]
 
 # Récupération du script terraform :
 git init
+
 git pull ...
 
 # Inistialiser les credentiels d'AWS
 export AWS_ACCESS_KEY_ID=<votre access key>
+
 export AWS_SECRET_ACCESS_KEY=<votre secret key>
 
 #Visualiser puis construire l'insfrastructure AWS 
 terraform plan
+
 terraform apply
