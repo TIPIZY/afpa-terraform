@@ -1,7 +1,4 @@
-Inline-style:
 ![AFPA](https://www.afpa.fr/afpa-theme/images/afpa/logo-afpa.png "Logo AFPA")
-
-Inline-style:
 ![TERRAFORM](https://chocolatey.org/content/packageimages/terraform.0.6.16.png "Logo AFPA")
 
 
