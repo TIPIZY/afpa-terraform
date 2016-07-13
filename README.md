@@ -1,3 +1,11 @@
+Inline-style:
+![AFPA](https://www.afpa.fr/afpa-theme/images/afpa/logo-afpa.png "Logo AFPA")
+
+Inline-style:
+![TERRAFORM](https://chocolatey.org/content/packageimages/terraform.0.6.16.png "Logo AFPA")
+
+
+
 # Afpa Terraform
 construire une infra EC2, Security_group, R53 avec Git et transfert de fichier en utilisant Terraform
 
