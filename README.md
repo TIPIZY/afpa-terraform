@@ -32,6 +32,7 @@ terraform destroy
 
 # Récupérer l'ensemble les informations réseau de l'infrastructure
 les informations sont : DNS privé, hostname, ip_local et ip_public
+
 terraform output output-csv
 ou
 terraform output output-csv > output.csv
