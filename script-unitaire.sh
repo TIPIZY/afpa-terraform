@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrskP/f3RuX9ls2Ep8vYDRpk35N8C3Wq95qHiMBybAWTBCnijP3r9j2BEAZafCr31ishO+hTaoZBbBamdIYMTweC4tv/qt9rY6BH4Xy8tOwt0Knecagy2g+q1bLc4GUcfoHdrDLwyatJr4Y0EbNokg8iVh4VOUHM+t6sBWx/7LczVP1O9IG/szs5g4pev2sXJMNfR2rpHbTGOX1Gcyz6ULP8/4+dDO1LF9sBUZo8QWudyuvGDPrs/dZQAdAg+mqNTmvXsNFImRcvtPIpEWVbJzin+hSbkbkTS+hgT0UFFKnBl5BMTrBmu/0EChH5ij+L7eQSqhKCrWRL0uFYH0hTCb iWael@localhost" >> /home/centos/.ssh/authorized_keys
+
