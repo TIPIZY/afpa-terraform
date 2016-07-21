@@ -62,9 +62,7 @@ terraform output output-csv | awk -F','  '{print $1}'
 ```
 
 sortie :
-```tf
-terraform output output-csv | awk -F','  '{print $1}'
-```
+
 $private_dns
  moodle1.afpa.aws.com
  moodle2.afpa.aws.com
