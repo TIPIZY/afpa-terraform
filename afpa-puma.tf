@@ -15,12 +15,15 @@ variable "afpa-vars" {  #${var.afpa-vars.}
         subnet_id = "subnet-78ea751d"
         authorized_ip    = "46.255.176.210/32"
         domain = "afpa.aws.com"
+        public-domain-id = "Z3P1E0U6CTTKSW"
+        public-domain = "afpa.neoxia-labs.com"
         private_key_name    = "neoxia-ismail" # neoxia-ismail.pem
         private_key_path = "/Users/isebbane/.ssh/neoxia-ismail.pem"
         source_pkg    = "/Users/isebbane/GIT/metis-middleware-install"
         destination_pkg = "/home/centos/"
         git_url = "http://10.0.1.249:10080/metis/atom-mediation.git"
         git_path = "/home/centos/git-sources"
+        public-ssh-key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrskP/f3RuX9ls2Ep8vYDRpk35N8C3Wq95qHiMBybAWTBCnijP3r9j2BEAZafCr31ishO+hTaoZBbBamdIYMTweC4tv/qt9rY6BH4Xy8tOwt0Knecagy2g+q1bLc4GUcfoHdrDLwyatJr4Y0EbNokg8iVh4VOUHM+t6sBWx/7LczVP1O9IG/szs5g4pev2sXJMNfR2rpHbTGOX1Gcyz6ULP8/4+dDO1LF9sBUZo8QWudy iWael@localhost"
     }
 }
 
@@ -107,6 +110,7 @@ resource "aws_instance" "afpa_terraform_moodle1" {
         "git pull ${var.afpa-vars.git_url}",
         "sudo sh -c \"echo preserve_hostname: true  >> /etc/cloud/cloud.cfg\"",
         "sudo  hostnamectl set-hostname ${aws_instance.afpa_terraform_moodle1.tags.Hostname}",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
         ]
     }
 
@@ -155,7 +159,9 @@ resource "aws_instance" "afpa_terraform_moodle2" {
         "git init",
         "git pull ${var.afpa-vars.git_url}",
         "sudo sh -c \"echo preserve_hostname: true  >> /etc/cloud/cloud.cfg\"",
-        "sudo  hostnamectl set-hostname ${aws_instance.afpa_terraform_moodle2.tags.Hostname}",        ]
+        "sudo  hostnamectl set-hostname ${aws_instance.afpa_terraform_moodle2.tags.Hostname}",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+         ]
     }
 
     # copier les packages RPM
@@ -210,7 +216,9 @@ resource "aws_instance" "afpa_terraform_sgbd1" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
-        "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_sgbd1.tags.Hostname}/g /etc/sysconfig/network",        ]
+        "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_sgbd1.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+        ]
     }
 
     # copier les packages RPM
@@ -265,6 +273,8 @@ resource "aws_instance" "afpa_terraform_sgbd2" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_sgbd2.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -320,6 +330,8 @@ resource "aws_instance" "afpa_terraform_mediation" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_mediation.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -375,6 +387,8 @@ resource "aws_instance" "afpa_terraform_fichier1" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_fichier1.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -431,6 +445,8 @@ resource "aws_instance" "afpa_terraform_fichier2" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_fichier2.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -487,6 +503,8 @@ resource "aws_instance" "afpa_terraform_webdav" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_webdav.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -543,6 +561,8 @@ resource "aws_instance" "afpa_terraform_memcached1" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_memcached1.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -597,7 +617,10 @@ resource "aws_instance" "afpa_terraform_memcached2" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
-        "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_memcached2.tags.Hostname}/g /etc/sysconfig/network",        ]
+        "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_memcached2.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
+      ]
     }
 
     # copier les packages RPM
@@ -651,6 +674,8 @@ resource "aws_instance" "afpa_terraform_logs" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_logs.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -705,6 +730,8 @@ resource "aws_instance" "afpa_terraform_outils" {
         "su -l centos -c \"git init ${var.afpa-vars.git_path}\"",
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_outils.tags.Hostname}/g /etc/sysconfig/network",
+        "echo 'ssh-rsa ${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
+
         ]
     }
 
@@ -723,12 +750,31 @@ resource "aws_instance" "afpa_terraform_outils" {
 
 }
 
+# DNS PUBLIC
+resource "aws_route53_record" "moodle1_public" {
+   zone_id = "${var.afpa-vars.public-domain-id}"
+   name = "moodle1.${var.afpa-vars.public-domain}"
+   type = "A"
+   ttl = "300"
+   records = ["${aws_instance.afpa_terraform_moodle1.public_ip}"]
+}
 
+resource "aws_route53_record" "moodle2_public" {
+   zone_id = "${var.afpa-vars.public-domain-id}"
+   name = "moodle2.${var.afpa-vars.public-domain}"
+   type = "A"
+   ttl = "300"
+   records = ["${aws_instance.afpa_terraform_moodle2.public_ip}"]
+}
+
+
+# DNS PRIVEE
 resource "aws_route53_zone" "afpa-r53" {
   name = "${var.afpa-vars.domain}"
   comment = "AFPA ENV TEST _creer avec Terraform par Ismail"
   vpc_id = "${var.afpa-vars.vpc_id}"
 }
+
 
 resource "aws_route53_record" "moodle1" {
    zone_id = "${aws_route53_zone.afpa-r53.zone_id}"
@@ -836,9 +882,13 @@ output "hosts" {
 }
 
 output "aws-ips-public" {
-value = "${aws_instance.afpa_terraform_moodle1.public_ip} \n${aws_instance.afpa_terraform_moodle2.public_ip} \n${aws_instance.afpa_terraform_sgbd1.public_ip} \n${aws_instance.afpa_terraform_sgbd2.public_ip}  \n${aws_instance.afpa_terraform_mediation.public_ip} \n${aws_instance.afpa_terraform_fichier1.public_ip} \n${aws_instance.afpa_terraform_fichier2.public_ip}  \n${aws_instance.afpa_terraform_webdav.public_ip}  \n${aws_instance.afpa_terraform_memcached1.public_ip} \n${aws_instance.afpa_terraform_memcached2.public_ip}  \n${aws_instance.afpa_terraform_logs.public_ip}  \n${aws_instance.afpa_terraform_outils.public_ip} "
+  value = "${aws_instance.afpa_terraform_moodle1.public_ip} \n${aws_instance.afpa_terraform_moodle2.public_ip} \n${aws_instance.afpa_terraform_sgbd1.public_ip} \n${aws_instance.afpa_terraform_sgbd2.public_ip}  \n${aws_instance.afpa_terraform_mediation.public_ip} \n${aws_instance.afpa_terraform_fichier1.public_ip} \n${aws_instance.afpa_terraform_fichier2.public_ip}  \n${aws_instance.afpa_terraform_webdav.public_ip}  \n${aws_instance.afpa_terraform_memcached1.public_ip} \n${aws_instance.afpa_terraform_memcached2.public_ip}  \n${aws_instance.afpa_terraform_logs.public_ip}  \n${aws_instance.afpa_terraform_outils.public_ip} "
 }
 
 output "outputcsv" {
-value = " #$private_dns,$hostname,$private_ip,$public_ip\n moodle1.${var.afpa-vars.domain},${var.afpa-hostname.moodle1},${aws_instance.afpa_terraform_moodle1.private_ip},${aws_instance.afpa_terraform_moodle1.public_ip}\n moodle2.${var.afpa-vars.domain},${var.afpa-hostname.moodle2},${aws_instance.afpa_terraform_moodle2.private_ip},${aws_instance.afpa_terraform_moodle2.public_ip}\n sgbd1.${var.afpa-vars.domain},${var.afpa-hostname.sgbd1},${aws_instance.afpa_terraform_sgbd1.private_ip},${aws_instance.afpa_terraform_sgbd1.public_ip}\n sgbd2.${var.afpa-vars.domain},${var.afpa-hostname.sgbd2},${aws_instance.afpa_terraform_sgbd2.private_ip},${aws_instance.afpa_terraform_sgbd2.public_ip}\n mediation.${var.afpa-vars.domain},${var.afpa-hostname.mediation},${aws_instance.afpa_terraform_mediation.private_ip},${aws_instance.afpa_terraform_mediation.public_ip}\n fichier1.${var.afpa-vars.domain},${var.afpa-hostname.fichier1},${aws_instance.afpa_terraform_fichier1.private_ip},${aws_instance.afpa_terraform_fichier1.public_ip}\n fichier2.${var.afpa-vars.domain},${var.afpa-hostname.fichier2},${aws_instance.afpa_terraform_fichier2.private_ip},${aws_instance.afpa_terraform_fichier2.public_ip}\n webdav.${var.afpa-vars.domain},${var.afpa-hostname.webdav},${aws_instance.afpa_terraform_webdav.private_ip},${aws_instance.afpa_terraform_webdav.public_ip}\n memcached1.${var.afpa-vars.domain},${var.afpa-hostname.memcached1},${aws_instance.afpa_terraform_memcached1.private_ip},${aws_instance.afpa_terraform_memcached1.public_ip}\n memcached2.${var.afpa-vars.domain},${var.afpa-hostname.memcached2},${aws_instance.afpa_terraform_memcached2.private_ip},${aws_instance.afpa_terraform_memcached2.public_ip}\n logs.${var.afpa-vars.domain},${var.afpa-hostname.logs},${aws_instance.afpa_terraform_logs.private_ip},${aws_instance.afpa_terraform_logs.public_ip}\n outils.${var.afpa-vars.domain},${var.afpa-hostname.outils},${aws_instance.afpa_terraform_outils.private_ip},${aws_instance.afpa_terraform_outils.public_ip}\n"
+    value = " #$private_dns,$hostname,$private_ip,$public_ip\n ${aws_route53_record.moodle1.name},${var.afpa-hostname.moodle1},${aws_instance.afpa_terraform_moodle1.private_ip},${aws_instance.afpa_terraform_moodle1.public_ip}\n ${aws_route53_record.moodle2.name},${var.afpa-hostname.moodle2},${aws_instance.afpa_terraform_moodle2.private_ip},${aws_instance.afpa_terraform_moodle2.public_ip}\n ${aws_route53_record.sgbd1.name},${var.afpa-hostname.sgbd1},${aws_instance.afpa_terraform_sgbd1.private_ip},${aws_instance.afpa_terraform_sgbd1.public_ip}\n ${aws_route53_record.sgbd2.name},${var.afpa-hostname.sgbd2},${aws_instance.afpa_terraform_sgbd2.private_ip},${aws_instance.afpa_terraform_sgbd2.public_ip}\n ${aws_route53_record.mediation.name},${var.afpa-hostname.mediation},${aws_instance.afpa_terraform_mediation.private_ip},${aws_instance.afpa_terraform_mediation.public_ip}\n ${aws_route53_record.fichier1.name},${var.afpa-hostname.fichier1},${aws_instance.afpa_terraform_fichier1.private_ip},${aws_instance.afpa_terraform_fichier1.public_ip}\n ${aws_route53_record.fichier2.name},${var.afpa-hostname.fichier2},${aws_instance.afpa_terraform_fichier2.private_ip},${aws_instance.afpa_terraform_fichier2.public_ip}\n ${aws_route53_record.webdav.name},${var.afpa-hostname.webdav},${aws_instance.afpa_terraform_webdav.private_ip},${aws_instance.afpa_terraform_webdav.public_ip}\n ${aws_route53_record.memcached1.name},${var.afpa-hostname.memcached1},${aws_instance.afpa_terraform_memcached1.private_ip},${aws_instance.afpa_terraform_memcached1.public_ip}\n ${aws_route53_record.fichier2.name},${var.afpa-hostname.memcached2},${aws_instance.afpa_terraform_memcached2.private_ip},${aws_instance.afpa_terraform_memcached2.public_ip}\n ${aws_route53_record.logs.name},${var.afpa-hostname.logs},${aws_instance.afpa_terraform_logs.private_ip},${aws_instance.afpa_terraform_logs.public_ip}\n ${aws_route53_record.outils.name},${var.afpa-hostname.outils},${aws_instance.afpa_terraform_outils.private_ip},${aws_instance.afpa_terraform_outils.public_ip}\n"
+}
+
+output "outputcsv" {
+  value = " Les IP / DNS public d'accès a l'application :\n ${aws_route53_record.moodle1_public.name},${aws_instance.afpa_terraform_moodle1.public_ip}\n ${aws_route53_record.moodle2_public.name},${aws_instance.afpa_terraform_moodle2.public_ip}"
 }
