@@ -218,6 +218,7 @@ resource "aws_instance" "afpa_terraform_sgbd1" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_sgbd1.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
         ]
     }
@@ -275,6 +276,7 @@ resource "aws_instance" "afpa_terraform_sgbd2" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_sgbd2.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -333,6 +335,7 @@ resource "aws_instance" "afpa_terraform_mediation" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_mediation.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -391,6 +394,7 @@ resource "aws_instance" "afpa_terraform_fichier1" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_fichier1.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -450,6 +454,7 @@ resource "aws_instance" "afpa_terraform_fichier2" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_fichier2.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -509,6 +514,7 @@ resource "aws_instance" "afpa_terraform_webdav" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_webdav.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -568,6 +574,7 @@ resource "aws_instance" "afpa_terraform_memcached1" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_memcached1.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -626,6 +633,7 @@ resource "aws_instance" "afpa_terraform_memcached2" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_memcached2.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
       ]
@@ -683,6 +691,7 @@ resource "aws_instance" "afpa_terraform_logs" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_logs.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
@@ -740,6 +749,7 @@ resource "aws_instance" "afpa_terraform_outils" {
         "su -l centos -c \"cd ${var.afpa-vars.git_path} && git pull ${var.afpa-vars.git_url}\"",
         "sudo sed -i s/HOSTNAME=.*/HOSTNAME=${aws_instance.afpa_terraform_outils.tags.Hostname}/g /etc/sysconfig/network",
         "sudo service iptables stop",
+        "chkconfig iptables off",
         "echo '${var.afpa-vars.public-ssh-key}' >> /home/centos/.ssh/authorized_keys "
 
         ]
